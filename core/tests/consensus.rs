@@ -616,6 +616,18 @@ fn test_secondary_pow_scale() {
 }
 
 #[test]
+fn scaling_block_reward() {
+	assert_eq!(reward(1, 0), 100_000 * GRIMBLE_BASE);
+	assert_eq!(reward(2, 0), 60 * GRIMBLE_BASE);
+	assert_eq!(reward(24_999, 0), 60 * GRIMBLE_BASE);
+	assert_eq!(reward(25_000, 0), 59 * GRIMBLE_BASE);
+	assert_eq!(reward(50_000, 0), 58 * GRIMBLE_BASE);
+	assert_eq!(reward(1_250_000, 0), 10 * GRIMBLE_BASE);
+	assert_eq!(reward(1_450_000, 0), 3 * GRIMBLE_BASE);
+	assert_eq!(reward(999_999_999, 0), 3 * GRIMBLE_BASE);
+}
+
+#[test]
 fn hard_forks() {
 	assert!(valid_header_version(0, 1));
 	assert!(valid_header_version(10, 1));

@@ -22,7 +22,7 @@ use std::fmt;
 use std::iter::FromIterator;
 use std::sync::Arc;
 
-use crate::consensus::{reward, REWARD};
+use crate::consensus::{reward, REWARD_REDUCTION_NUM_BLOCKS};
 use crate::core::committed::{self, Committed};
 use crate::core::compact_block::{CompactBlock, CompactBlockBody};
 use crate::core::hash::{Hash, Hashed, ZERO_HASH};
@@ -319,18 +319,37 @@ impl BlockHeader {
 	/// The "overage" to use when verifying the kernel sums.
 	/// For a block header the overage is 0 - reward.
 	pub fn overage(&self) -> i64 {
-		(REWARD as i64).checked_neg().unwrap_or(0)
+		(reward(self.height, 0) as i64).checked_neg().unwrap_or(0)
 	}
 
 	/// The "total overage" to use when verifying the kernel sums for a full
-	/// chain state. For a full chain state this is 0 - (height * reward).
+	/// chain state.
 	pub fn total_overage(&self, genesis_had_reward: bool) -> i64 {
-		let mut reward_count = self.height;
+		let mut total_reward: u64 = 0;
 		if genesis_had_reward {
-			reward_count += 1;
+			total_reward += reward(0, 0);
 		}
 
-		((reward_count * REWARD) as i64).checked_neg().unwrap_or(0)
+		if self.height >= 1 {
+			total_reward += reward(1, 0);
+		}
+
+		if self.height >= 2 {
+			let num_reductions = self.height / REWARD_REDUCTION_NUM_BLOCKS;
+			for h in 0..num_reductions {
+				total_reward +=
+					reward(h * REWARD_REDUCTION_NUM_BLOCKS, 0) * REWARD_REDUCTION_NUM_BLOCKS;
+			}
+			// Remainder or the reward from blocks the first REWARD_REDUCTION_NUM_BLOCKS blocks
+			total_reward += reward(self.height, 0) * (self.height % REWARD_REDUCTION_NUM_BLOCKS);
+
+			if self.height < REWARD_REDUCTION_NUM_BLOCKS {
+				// Correct total because block 1 was counted twice in this case
+				total_reward -= reward(0, 0);
+			}
+		}
+
+		total_reward as i64
 	}
 
 	/// Total kernel offset for the chain state up to and including this block.
@@ -673,7 +692,7 @@ impl Block {
 		{
 			let secp = static_secp_instance();
 			let secp = secp.lock();
-			let over_commit = secp.commit_value(reward(self.total_fees()))?;
+			let over_commit = secp.commit_value(reward(self.header.height, self.total_fees()))?;
 
 			let out_adjust_sum =
 				secp.commit_sum(map_vec!(cb_outs, |x| x.commitment()), vec![over_commit])?;
@@ -698,5 +717,56 @@ impl Block {
 			}
 		}
 		Ok(())
+	}
+}
+
+#[cfg(test)]
+mod tests {
+	use super::*;
+	use crate::consensus::GRIMBLE_BASE;
+
+	#[test]
+	fn total_overage_without_genesis_block_reward() {
+		let header = BlockHeader::default();
+		assert_eq!(header.total_overage(false), 0i64);
+	}
+
+	#[test]
+	fn total_overage_with_genesis_block_reward() {
+		let header = BlockHeader::default();
+		assert_eq!(header.total_overage(true), (60 * GRIMBLE_BASE) as i64);
+	}
+
+	#[test]
+	fn total_overage_during_reward_reductions() {
+		let header = BlockHeader {
+			height: 1,
+			..BlockHeader::default()
+		};
+		assert_eq!(header.total_overage(false), (100_000 * GRIMBLE_BASE) as i64);
+
+		let header = BlockHeader {
+			height: 2,
+			..BlockHeader::default()
+		};
+		assert_eq!(header.total_overage(false), (100_060 * GRIMBLE_BASE) as i64);
+
+		let header = BlockHeader {
+			height: 100_003,
+			..BlockHeader::default()
+		};
+		assert_eq!(
+			header.total_overage(false),
+			(5_950_168 * GRIMBLE_BASE) as i64
+		);
+	}
+
+	#[test]
+	fn total_overage_after_last_reward_reduction() {
+		let header = BlockHeader {
+			height: 1_775_000,
+			..BlockHeader::default()
+		};
+		assert_eq!(header.total_overage(false), 46_750_000_000_000_000);
 	}
 }

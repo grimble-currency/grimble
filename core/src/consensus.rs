@@ -24,9 +24,9 @@ use crate::global;
 use crate::pow::Difficulty;
 
 /// A grin is divisible to 10^9, following the SI prefixes
-pub const GRIN_BASE: u64 = 1_000_000_000;
+pub const GRIMBLE_BASE: u64 = 1_000_000_000;
 /// Milligrin, a thousand of a grin
-pub const MILLI_GRIN: u64 = GRIN_BASE / 1_000;
+pub const MILLI_GRIN: u64 = GRIMBLE_BASE / 1_000;
 /// Microgrin, a thousand of a milligrin
 pub const MICRO_GRIN: u64 = MILLI_GRIN / 1_000;
 /// Nanogrin, smallest unit, takes a billion to make a grin
@@ -38,12 +38,25 @@ pub const NANO_GRIN: u64 = 1;
 /// (adjusting the reward accordingly).
 pub const BLOCK_TIME_SEC: u64 = 60;
 
-/// The block subsidy amount, one grin per second on average
-pub const REWARD: u64 = BLOCK_TIME_SEC * GRIN_BASE;
+/// The coinbase reward is reduced every this many blocks
+pub const REWARD_REDUCTION_NUM_BLOCKS: u64 = 25_000;
+/// The factor with which the block size is reduced every step
+pub const REWARD_REDUCTION_FACTOR: f64 = 0.95;
 
 /// Actual block reward for a given total fee amount
-pub fn reward(fee: u64) -> u64 {
-	REWARD.saturating_add(fee)
+pub fn reward(height: u64, fee: u64) -> u64 {
+	let reward;
+	if height == 0 {
+		reward = BLOCK_TIME_SEC * GRIMBLE_BASE;
+	} else if height == 1 {
+		reward = 100_000 * GRIMBLE_BASE;
+	} else if height < 1_449_999 {
+		let num_reductions = height / REWARD_REDUCTION_NUM_BLOCKS;
+		reward = (BLOCK_TIME_SEC - num_reductions) * GRIMBLE_BASE;
+	} else {
+		reward = 3 * GRIMBLE_BASE;
+	}
+	reward.saturating_add(fee)
 }
 
 /// Nominal height for standard time intervals, hour is 60 blocks

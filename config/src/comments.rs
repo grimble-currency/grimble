@@ -418,7 +418,7 @@ fn comments() -> HashMap<String, String> {
 		"no_commit_cache".to_string(),
 		"
 #If true, don't store calculated commits in the database
-#better privacy, but at a performance cost of having to 
+#better privacy, but at a performance cost of having to
 #re-calculate commits every time they're used
 "
 		.to_string(),
