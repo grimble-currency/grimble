@@ -16,8 +16,8 @@ members = ["api", "chain", "config", "core", "keychain", "p2p", "servers", "stor
 exclude = ["etc/gen_gen"]
 
 [[bin]]
-name = "grin"
-path = "src/bin/grin.rs"
+name = "grimble"
+path = "src/bin/grimble.rs"
 
 [dependencies]
 blake2-rfc = "0.2"

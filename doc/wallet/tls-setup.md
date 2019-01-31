@@ -3,7 +3,7 @@
 ## What you need
 * A server with a static IP address (eg `3.3.3.3`)
 * A domain name ownership (`example.com`)
-* DNS configuration for this IP (`grin1.example.com` -> `3.3.3.3`)
+* DNS configuration for this IP (`grimble1.example.com` -> `3.3.3.3`)
 
 If you don't have a static IP you may want to consider using services like DynDNS which support dynamic IP resolving, this case is not covered by this guide, but all the next steps are equally applicable.
 
@@ -35,16 +35,16 @@ Go to [Certbot home page](https://certbot.eff.org/), choose I'm using `None of t
 If you have experince with `certboot` feel free to use any type of challenge. This guide covers the simplest case of HTTP challenge. For this you need to have a web server listening on port `80`, which requires running it as root in the simplest case. We will use the server provided by certbot. **Make sure you have port 80 open**
 
 ```sh
-sudo certbot certonly --standalone -d grin1.example.com
+sudo certbot certonly --standalone -d grimble1.example.com
 ```
 
 It will ask you some questions, as result you should see something like:
 
 ```
 Congratulations! Your certificate and chain have been saved at:
-  /etc/letsencrypt/live/grin1.example.com/fullchain.pem
+  /etc/letsencrypt/live/grimble1.example.com/fullchain.pem
  Your key file has been saved at:
-  /etc/letsencrypt/live/grin1.example.com/privkey.pem
+  /etc/letsencrypt/live/grimble1.example.com/privkey.pem
  Your cert will expire on 2019-01-16. To obtain a new or tweaked
  version of this certificate in the future, simply run certbot
  again. To non-interactively renew *all* of your certificates, run
@@ -68,7 +68,7 @@ The last step is needed for renewal, it makes sure that all new files will have 
 Refer to `I have a TLS certificate already` because you have it now. Use the folowing values:
 
 ```toml
-tls_certificate_file = "/etc/letsencrypt/live/grin1.example.com/fullchain.pem"
-tls_certificate_key =  "/etc/letsencrypt/live/grin1.example.com/privkey.pem"
+tls_certificate_file = "/etc/letsencrypt/live/grimble1.example.com/fullchain.pem"
+tls_certificate_key =  "/etc/letsencrypt/live/grimble1.example.com/privkey.pem"
 ```
 

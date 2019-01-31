@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! Main for building the binary of a Grin peer-to-peer node.
+//! Main for building the binary of a Grimble peer-to-peer node.
 
 #[macro_use]
 extern crate clap;
@@ -46,7 +46,7 @@ pub mod built_info {
 pub fn info_strings() -> (String, String) {
 	(
 		format!(
-			"This is Grin version {}{}, built for {} by {}.",
+			"This is Grimble version {}{}, built for {} by {}.",
 			built_info::PKG_VERSION,
 			built_info::GIT_VERSION.map_or_else(|| "".to_owned(), |v| format!(" (git {})", v)),
 			built_info::TARGET,
@@ -74,7 +74,7 @@ fn main() {
 }
 
 fn real_main() -> i32 {
-	let yml = load_yaml!("grin.yml");
+	let yml = load_yaml!("grimble.yml");
 	let args = App::from_yaml(yml).get_matches();
 	let mut wallet_config = None;
 	let mut node_config = None;
@@ -118,7 +118,7 @@ fn real_main() -> i32 {
 			if !cmd::seed_exists(w.members.as_ref().unwrap().wallet.clone()) {
 				if "init" == wallet_args.subcommand().0 || "recover" == wallet_args.subcommand().0 {
 				} else {
-					println!("Wallet seed file doesn't exist. Run `grin wallet init` first");
+					println!("Wallet seed file doesn't exist. Run `grimble wallet init` first");
 					exit(1);
 				}
 			}

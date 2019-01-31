@@ -253,7 +253,7 @@ impl Server {
 			stop_state.clone(),
 		);
 
-		warn!("Grin server started.");
+		warn!("Grimble server started.");
 		Ok(Server {
 			config,
 			p2p: p2p_server,

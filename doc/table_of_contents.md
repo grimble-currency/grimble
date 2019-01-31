@@ -2,13 +2,13 @@
 
 ## Explaining grin
 
-- [intro](intro.md) - Technical introduction to grin
+- [intro](intro.md) - Technical introduction to Grin
 - [grin4bitcoiners](grin4bitcoiners.md) - Explaining grin from a bitcoiner's perspective
 
 ## Understand the grin implementation
 
-- [chain_sync](chain/chain_sync.md) - About how Grin's blockchain is synchronized
-- [blocks_and_headers](chain/blocks_and_headers.md) - How Grin tracks blocks and headers on the chain
+- [chain_sync](chain/chain_sync.md) - About how Grimble's blockchain is synchronized
+- [blocks_and_headers](chain/blocks_and_headers.md) - How Grimble tracks blocks and headers on the chain
 - [contract_ideas](contract_ideas.md) - Ideas on how to implement contracts
 - [dandelion/dandelion](dandelion/dandelion.md) - About transaction propagation and cut-through. Stemming and fluffing!
 - [dandelion/simulation](dandelion/simulation.md) - Dandelion simulation - aggregating transaction without lock_height Stemming and fluffing!
@@ -16,16 +16,14 @@
 - [merkle](merkle.md) - Technical explanation of grin's favorite kind of merkle trees
 - [merkle_proof graph](merkle_proof/merkle_proof.png) - Example merkle proof with pruning applied
 - [pruning](pruning.md) - Technical explanation of pruning
-- [stratum](stratum.md) - Technical explanation of Grin Stratum RPC protocol
+- [stratum](stratum.md) - Technical explanation of Grimble Stratum RPC protocol
 - [transaction UML](wallet/transaction/basic-transaction-wf.png) - UML of an interactive transaction (aggregating transaction without `lock_height`)
 
 ## Build and use
 
-- [api](api/api.md) - Explaining the different APIs in Grin and how to use them
-- [build](build.md) - Explaining how to build and run the Grin binaries
-- [release](release_instruction.md) - Instructions of making a release
-- [usage](usage.md) - Explaining how to use grin in Testnet3
-- [wallet](wallet/usage.md) - Explains the wallet design and `grin wallet` sub-commands
+- [api](api/api.md) - Explaining the different APIs in Grimble and how to use them
+- [build](build.md) - Explaining how to build and run the Grimble binaries
+- [wallet](wallet/usage.md) - Explains the wallet design and `grimble wallet` sub-commands
 
 ## External (wiki)
 

@@ -37,12 +37,12 @@ use crate::wallet::WalletConfig;
 
 /// The default file name to use when trying to derive
 /// the node config file location
-pub const SERVER_CONFIG_FILE_NAME: &'static str = "grin-server.toml";
+pub const SERVER_CONFIG_FILE_NAME: &'static str = "grimble-server.toml";
 /// And a wallet configuration file name
-pub const WALLET_CONFIG_FILE_NAME: &'static str = "grin-wallet.toml";
-const SERVER_LOG_FILE_NAME: &'static str = "grin-server.log";
-const WALLET_LOG_FILE_NAME: &'static str = "grin-wallet.log";
-const GRIN_HOME: &'static str = ".grin";
+pub const WALLET_CONFIG_FILE_NAME: &'static str = "grimble-wallet.toml";
+const SERVER_LOG_FILE_NAME: &'static str = "grimble-server.log";
+const WALLET_LOG_FILE_NAME: &'static str = "grimble-wallet.log";
+const GRIN_HOME: &'static str = ".grimble";
 const GRIN_CHAIN_DIR: &'static str = "chain_data";
 /// Wallet data directory
 pub const GRIN_WALLET_DIR: &'static str = "wallet_data";

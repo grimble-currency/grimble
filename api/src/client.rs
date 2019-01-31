@@ -129,7 +129,7 @@ fn build_request<'a>(
 	let mut builder = Request::builder();
 	if api_secret.is_some() {
 		let basic_auth =
-			"Basic ".to_string() + &to_base64(&("grin:".to_string() + &api_secret.unwrap()));
+			"Basic ".to_string() + &to_base64(&("grimble:".to_string() + &api_secret.unwrap()));
 		builder.header(AUTHORIZATION, basic_auth);
 	}
 

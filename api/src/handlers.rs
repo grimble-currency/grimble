@@ -77,8 +77,8 @@ pub fn start_rest_apis(
 	let mut apis = ApiServer::new();
 	let mut router = build_router(chain, tx_pool, peers).expect("unable to build API router");
 	if api_secret.is_some() {
-		let api_basic_auth =
-			"Basic ".to_string() + &util::to_base64(&("grin:".to_string() + &api_secret.unwrap()));
+		let api_basic_auth = "Basic ".to_string()
+			+ &util::to_base64(&("grimble:".to_string() + &api_secret.unwrap()));
 		let basic_realm = "Basic realm=GrinAPI".to_string();
 		let basic_auth_middleware = Arc::new(BasicAuthMiddleware::new(api_basic_auth, basic_realm));
 		router.add_middleware(basic_auth_middleware);

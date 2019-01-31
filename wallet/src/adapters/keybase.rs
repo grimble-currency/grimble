@@ -269,7 +269,7 @@ fn poll(nseconds: u64, channel: &str) -> Option<Slate> {
 		sleep(POLL_SLEEP_DURATION);
 	}
 	error!(
-		"No response from @{} in {} seconds. Grin send failed!",
+		"No response from @{} in {} seconds. Grimble send failed!",
 		channel, nseconds
 	);
 	None

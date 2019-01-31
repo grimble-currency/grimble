@@ -61,10 +61,10 @@ mod wallet_tests {
 		current_dir.push(wallet_name);
 		let _ = fs::create_dir_all(current_dir.clone());
 		let mut config_file_name = current_dir.clone();
-		config_file_name.push("grin-wallet.toml");
+		config_file_name.push("grimble-wallet.toml");
 		if config_file_name.exists() {
 			return Err(grin_wallet::ErrorKind::ArgumentError(
-				"grin-wallet.toml already exists in the target directory. Please remove it first"
+				"grimble-wallet.toml already exists in the target directory. Please remove it first"
 					.to_owned(),
 			))?;
 		}
@@ -92,7 +92,7 @@ mod wallet_tests {
 		current_dir.push(wallet_name);
 		let _ = fs::create_dir_all(current_dir.clone());
 		let mut config_file_name = current_dir.clone();
-		config_file_name.push("grin-wallet.toml");
+		config_file_name.push("grimble-wallet.toml");
 		GlobalWalletConfig::new(config_file_name.to_str().unwrap())
 			.unwrap()
 			.members
@@ -160,7 +160,7 @@ mod wallet_tests {
 		let chain = wallet_proxy.chain.clone();
 
 		// load app yaml. If it don't exist, just say so and exit
-		let yml = load_yaml!("../grin.yml");
+		let yml = load_yaml!("../grimble.yml");
 		let app = App::from_yaml(yml);
 
 		// wallet init
