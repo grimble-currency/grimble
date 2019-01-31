@@ -42,7 +42,7 @@ RUN grin --floonet server config && \
 
 VOLUME ["/root/.grin"]
 
-EXPOSE 13413 13414 13415 13416
+EXPOSE 24413 24414 24415 24416
 
 ENTRYPOINT ["grin", "--floonet"]
 

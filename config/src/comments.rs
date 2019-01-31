@@ -213,15 +213,15 @@ fn comments() -> HashMap<String, String> {
 		"[server.p2p_config.capabilities]".to_string(),
 		"#If the seeding type is List, the list of peers to connect to can
 #be specified as follows:
-#seeds = [\"192.168.0.1:3414\",\"192.168.0.2:3414\"]
+#seeds = [\"192.168.0.1:4414\",\"192.168.0.2:4414\"]
 
 #hardcoded peer lists for allow/deny
 #will *only* connect to peers in allow list
-#peers_allow = [\"192.168.0.1:3414\", \"192.168.0.2:3414\"]
+#peers_allow = [\"192.168.0.1:4414\", \"192.168.0.2:4414\"]
 #will *never* connect to peers in deny list
-#peers_deny = [\"192.168.0.3:3414\", \"192.168.0.4:3414\"]
+#peers_deny = [\"192.168.0.3:4414\", \"192.168.0.4:4414\"]
 #a list of preferred peers to connect to
-#peers_preferred = [\"192.168.0.1:3414\",\"192.168.0.2:3414\"]
+#peers_preferred = [\"192.168.0.1:4414\",\"192.168.0.2:4414\"]
 
 #how long a banned peer should stay banned
 #ban_window = 10800

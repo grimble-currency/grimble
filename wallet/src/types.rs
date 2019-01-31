@@ -69,12 +69,12 @@ pub struct WalletConfig {
 impl Default for WalletConfig {
 	fn default() -> WalletConfig {
 		WalletConfig {
-			chain_type: Some(ChainTypes::Floonet),
-			api_listen_interface: "127.0.0.1".to_string(),
-			api_listen_port: 3415,
+			chain_type: Some(ChainTypes::Mainnet),
+			api_listen_interface: "0.0.0.0".to_string(),
+			api_listen_port: 4415,
 			api_secret_path: Some(".api_secret".to_string()),
 			node_api_secret_path: Some(".api_secret".to_string()),
-			check_node_api_http_addr: "http://127.0.0.1:3413".to_string(),
+			check_node_api_http_addr: "http://127.0.0.1:4413".to_string(),
 			owner_api_include_foreign: Some(false),
 			data_file_dir: ".".to_string(),
 			no_commit_cache: Some(false),

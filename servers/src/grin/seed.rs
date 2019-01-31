@@ -388,7 +388,7 @@ pub fn dns_seeds() -> Box<dyn Fn() -> Vec<SocketAddr> + Send> {
 				Ok(addrs) => addresses.append(
 					&mut (addrs
 						.map(|mut addr| {
-							addr.set_port(if global::is_floonet() { 13414 } else { 3414 });
+							addr.set_port(if global::is_floonet() { 24414 } else { 4414 });
 							addr
 						})
 						.filter(|addr| !temp_addresses.contains(addr))

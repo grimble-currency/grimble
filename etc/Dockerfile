@@ -42,7 +42,7 @@ RUN grin server config && \
 
 VOLUME ["/root/.grin"]
 
-EXPOSE 3413 3414 3415 3416
+EXPOSE 4413 4414 4415 4416
 
 ENTRYPOINT ["grin"]
 
